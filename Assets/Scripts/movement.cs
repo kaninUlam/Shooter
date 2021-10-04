@@ -5,34 +5,36 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
     private float movementSpeed = 5f;
-
     public float jumpHeight = 3f;
+    public float horizontalInput = 0f;
+
     public bool isJumping = false;
     public bool grounded = true;
+    public bool FacingRight = false;
+    
     private Rigidbody2D rb2d;
-
+    
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
-    // Update is called once per frame
     void Update()
     {
        
         float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
         transform.position = transform.position + new Vector3(horizontalInput * movementSpeed * Time.deltaTime, 0, 0);
 
-        Vector3 characterScale = transform.localScale;
-        if (Input.GetAxis("Horizontal") < 0 )
+        if (horizontalInput < 0) // when player press a sprite and firepoint rotate to the left
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            this.gameObject.transform.eulerAngles = new Vector3(0f, -180f, 0f);
+
         }
-        if (Input.GetAxis("Horizontal") > 0)
+        if (horizontalInput > 0)// when player press a sprite and firepoint rotate to the right
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            this.gameObject.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         }
-        if (Input.GetKeyDown("space") && isJumping == false)
+
+        if (Input.GetKeyDown("w") && isJumping == false) // jump script
         {
             rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             Debug.Log("jumped");
@@ -40,7 +42,7 @@ public class movement : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)//to set the player to ground after jumping
     {
         if(collision.gameObject.tag == "ground")
         {

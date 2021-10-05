@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class monsterMovement : MonoBehaviour
 {
-    float speed = 10f;
+    float speed = 5f;
     Rigidbody2D monrb2d;
     // Start is called before the first frame update
     void Start()
@@ -16,5 +16,5 @@ public class monsterMovement : MonoBehaviour
     void Update()
     {
         transform.position = transform.position + new Vector3(speed * Time.deltaTime, 0, 0);
-    }
+    }       
 }

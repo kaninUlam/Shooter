@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public GameObject player = null;
     public GameObject Enemy = null;
-    public GameObject[] playerspawnpoint = null;
     public GameObject[] monsterspawnpoint = null;
 
 
@@ -24,14 +23,9 @@ public class GameManager : MonoBehaviour
     }
     void SpawnPlayer()
     {
-        GameObject Playerspawngroup = new GameObject("PlayerSpawnGroup");
-        foreach(GameObject gameObject in playerspawnpoint)
-        {
-            player = Instantiate(player, transform.position, transform.rotation, Playerspawngroup.transform);
+            player = Instantiate(player, transform.position, transform.rotation);
             player.AddComponent<movement>();
-            player.AddComponent<health>();
-        }
-        
+        player.AddComponent<health>();
     }
     void SpawnEnemy()
     {

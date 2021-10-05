@@ -18,6 +18,5 @@ public class weapon : MonoBehaviour
     void Shoot()
     {
         Instantiate(bee, firepoint.position, firepoint.rotation);
-
     }
 }

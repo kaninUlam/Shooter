@@ -5,7 +5,7 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
     private float movementSpeed = 5f;
-    public float jumpHeight = 3f;
+    public float jumpHeight = 5f;
     public float horizontalInput = 0f;
 
     public bool isJumping = false;
@@ -37,7 +37,6 @@ public class movement : MonoBehaviour
         if (Input.GetKeyDown("w") && isJumping == false) // jump script
         {
             rb2d.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-            Debug.Log("jumped");
             isJumping = true;
         }
 

@@ -1,20 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class monsterMovement : MonoBehaviour
 {
-    float speed = 5f;
-    Rigidbody2D monrb2d;
+    public float speed;
+    public float distance;
+
+    private bool movingRight = true;
+
+    public Transform groundDetection;
+    public LayerMask layer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        monrb2d = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + new Vector3(speed * Time.deltaTime, 0, 0);
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, layer);
+        if(groundInfo.collider == false)
+        {
+            if(movingRight == true)
+            {
+                transform.eulerAngles = new Vector3(0, -180, 0);
+                movingRight = false;
+
+            }else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                movingRight = true;
+            }
+        }
     }       
 }

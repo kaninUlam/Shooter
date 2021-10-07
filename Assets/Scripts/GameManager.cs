@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
         foreach (GameObject gameObject in monsterspawnpoint)
         {
             Enemy = Instantiate(Enemy, gameObject.transform.position, gameObject.transform.rotation, Spawngroup.transform);
-            Enemy.AddComponent<monsterMovement>();
         }
     }
 }
